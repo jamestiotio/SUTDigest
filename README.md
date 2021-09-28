@@ -63,7 +63,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
 
 If you encounter any problems or if you would like to propose any new rules/folders, feel free to raise an issue or create a pull request! If you see any feature that you would like to be implemented, feel free to browse the issue/pull request list and vote for it by using emojis!
 
-Feel free to also contribute by testing and verifying that this program works on other flavors/environment configurations of Windows. (I doubt that it will work on other OS-es since it makes use of Windows-specific APIs.)
+Feel free to also contribute by testing and verifying that this program works on other flavors/environment configurations of Windows. I doubt that it will work on other OS-es since it makes use of Windows-specific APIs. A platform-agnostic solution would need to somehow utilize the Microsoft Graph API, which is not accessible at the moment. 😔 (If you have any suggestions on making this OS-agnostic without Microsoft Graph API, feel free to bring it up!)
 
 Please be aware that any new rules/folders should benefit the majority of the population and this is up to the discretion of the community. Rules/folders that are more personal in nature would not be accepted and should be individually applied/managed anyway.
 
