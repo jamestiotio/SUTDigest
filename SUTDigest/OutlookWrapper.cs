@@ -502,7 +502,6 @@ namespace SUTDigest
                     rules.Save(true);
                 }
 
-                // This rule is client-only
                 string allStudentsRuleName = "Emails Sent To All Students Without BCC";
 
                 if (!RuleExist(allStudentsRuleName, rules))
