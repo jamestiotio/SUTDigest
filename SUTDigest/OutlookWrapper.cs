@@ -130,17 +130,15 @@ namespace SUTDigest
 
                 String[] folders =
                     folderPath.Split(backslash.ToCharArray());
-                folder =
-                    outlookApp.Session.Folders[folders[0]]
-                    as Outlook.Folder;
+                folder = outlookApp.Session.Folders[folders[0]] as Outlook.Folder;
 
                 if (folder != null)
                 {
-                    for (int i = 1; i <= folders.GetUpperBound(0); i++)
+                    // It's a 1D array; there's no reason to be looking for a 2d-array specific call.
+                    for (int i = 1; i <= folders.Length; i++)
                     {
                         Outlook.Folders subFolders = folder.Folders;
-                        folder = subFolders[folders[i]]
-                            as Outlook.Folder;
+                        folder = subFolders[folders[i]] as Outlook.Folder;
 
                         if (folder == null)
                         {
@@ -151,6 +149,24 @@ namespace SUTDigest
                 return folder;
             }
             catch
+            {
+                return null;
+            }
+        }
+
+        public static Outlook.Folder GetSubFolder(string folderName, Outlook.Folder baseFolder, Outlook.Application outlookApp)
+        {
+            Outlook.Folder folder;
+            try
+            {
+                folder = (Outlook.Folder)baseFolder.Folders[folderName];
+                if (folder is null)
+                {
+                    folder = (Outlook.Folder)baseFolder.Folders.Add(folderName, Outlook.OlDefaultFolders.olFolderInbox);
+                }
+                return folder;
+            }
+            catch (Exception ex)
             {
                 return null;
             }
@@ -178,26 +194,26 @@ namespace SUTDigest
         {
             Outlook.NameSpace session = null;
             Outlook.Store store = null;
-            Outlook.MAPIFolder rootFolder = null;
-            Outlook.Folders rootFolderFolders = null;
-            Outlook.MAPIFolder othersFolder = null;
-            Outlook.Folders othersSubfolders = null;
-            Outlook.MAPIFolder studentClubsFolder = null;
-            Outlook.MAPIFolder marketingFolder = null;
-            Outlook.MAPIFolder cdcFolder = null;
-            Outlook.MAPIFolder whatzNewzFolder = null;
-            Outlook.MAPIFolder libraryFolder = null;
-            Outlook.MAPIFolder studentGovFolder = null;
-            Outlook.MAPIFolder allStudentsFolder = null;
-            Outlook.MAPIFolder newsCoverageFolder = null;
-            Outlook.MAPIFolder socialMediaReportFolder = null;
-            Outlook.MAPIFolder researchFolder = null;
+            Outlook.Folder rootFolder = null,
+                othersFolder = null,
+                studentClubsFolder = null,
+                marketingFolder = null,
+                cdcFolder = null,
+                whatzNewzFolder = null,
+                libraryFolder = null,
+                studentGovFolder = null,
+                allStudentsFolder = null,
+                newsCoverageFolder = null,
+                socialMediaReportFolder = null,
+                researchFolder = null;
+            Outlook.Folders rootFolderFolders = null,
+                othersSubfolders = null;
 
             try
             {
                 session = application.Session;
                 store = session.DefaultStore;
-                rootFolder = store.GetRootFolder();
+                rootFolder = (Outlook.Folder)store.GetRootFolder();
 
                 // Folders are identified by name
                 othersFolder = GetFolder(rootFolder.FolderPath + @"\Others", application);
@@ -205,80 +221,21 @@ namespace SUTDigest
                 if (othersFolder == null)
                 {
                     rootFolderFolders = rootFolder.Folders;
-                    othersFolder = rootFolderFolders.Add("Others", Outlook.OlDefaultFolders.olFolderInbox);
+                    othersFolder = (Outlook.Folder)rootFolderFolders.Add("Others", Outlook.OlDefaultFolders.olFolderInbox);
                 }
 
                 othersSubfolders = othersFolder.Folders;
 
-                studentClubsFolder = GetFolder(rootFolder.FolderPath + @"\Others\Student Clubs", application);
-
-                if (studentClubsFolder == null)
-                {
-                    studentClubsFolder = othersSubfolders.Add("Student Clubs", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                marketingFolder = GetFolder(rootFolder.FolderPath + @"\Others\Office of Marketing", application);
-
-                if (marketingFolder == null)
-                {
-                    marketingFolder = othersSubfolders.Add("Office of Marketing", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                cdcFolder = GetFolder(rootFolder.FolderPath + @"\Others\Career Development Centre", application);
-
-                if (cdcFolder == null)
-                {
-                    cdcFolder = othersSubfolders.Add("Career Development Centre", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                whatzNewzFolder = GetFolder(rootFolder.FolderPath + @"\Others\Whatz Newz", application);
-
-                if (whatzNewzFolder == null)
-                {
-                    whatzNewzFolder = othersSubfolders.Add("Whatz Newz", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                libraryFolder = GetFolder(rootFolder.FolderPath + @"\Others\Library", application);
-
-                if (libraryFolder == null)
-                {
-                    libraryFolder = othersSubfolders.Add("Library", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                studentGovFolder = GetFolder(rootFolder.FolderPath + @"\Others\Student Government", application);
-
-                if (studentGovFolder == null)
-                {
-                    studentGovFolder = othersSubfolders.Add("Student Government", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                allStudentsFolder = GetFolder(rootFolder.FolderPath + @"\Others\All Students", application);
-
-                if (allStudentsFolder == null)
-                {
-                    allStudentsFolder = othersSubfolders.Add("All Students", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                newsCoverageFolder = GetFolder(rootFolder.FolderPath + @"\Others\News Coverage", application);
-
-                if (newsCoverageFolder == null)
-                {
-                    newsCoverageFolder = othersSubfolders.Add("News Coverage", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                socialMediaReportFolder = GetFolder(rootFolder.FolderPath + @"\Others\Social Media Report", application);
-
-                if (socialMediaReportFolder == null)
-                {
-                    socialMediaReportFolder = othersSubfolders.Add("Social Media Report", Outlook.OlDefaultFolders.olFolderInbox);
-                }
-
-                researchFolder = GetFolder(rootFolder.FolderPath + @"\Others\Office of Research", application);
-
-                if (researchFolder == null)
-                {
-                    researchFolder = othersSubfolders.Add("Office of Research", Outlook.OlDefaultFolders.olFolderInbox);
-                }
+                studentClubsFolder = GetSubFolder(@"Student Clubs", othersFolder, application);
+                marketingFolder = GetSubFolder(@"Office of Marketing", othersFolder, application);
+                cdcFolder = GetSubFolder(@"Career Development Centre", othersFolder, application);
+                whatzNewzFolder = GetSubFolder(@"Whatz Newz", othersFolder, application);
+                libraryFolder = GetSubFolder(@"Library", othersFolder, application);
+                studentGovFolder = GetSubFolder(@"Student Government", othersFolder, application);
+                allStudentsFolder = GetSubFolder(@"All Students", othersFolder, application);
+                newsCoverageFolder = GetSubFolder(@"News Coverage", othersFolder, application);
+                socialMediaReportFolder = GetSubFolder(@"Social Media Report", othersFolder, application);
+                researchFolder = GetSubFolder(@"Office of Research", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -287,38 +244,22 @@ namespace SUTDigest
             }
             finally
             {
-                if (rootFolderFolders != null)
-                    ReleaseComObject(rootFolderFolders);
-                if (rootFolder != null)
-                    ReleaseComObject(rootFolder);
-                if (othersFolder != null)
-                    ReleaseComObject(othersFolder);
-                if (othersSubfolders != null)
-                    ReleaseComObject(othersSubfolders);
-                if (studentClubsFolder != null)
-                    ReleaseComObject(studentClubsFolder);
-                if (marketingFolder != null)
-                    ReleaseComObject(marketingFolder);
-                if (cdcFolder != null)
-                    ReleaseComObject(cdcFolder);
-                if (whatzNewzFolder != null)
-                    ReleaseComObject(whatzNewzFolder);
-                if (libraryFolder != null)
-                    ReleaseComObject(libraryFolder);
-                if (studentGovFolder != null)
-                    ReleaseComObject(studentGovFolder);
-                if (allStudentsFolder != null)
-                    ReleaseComObject(allStudentsFolder);
-                if (newsCoverageFolder != null)
-                    ReleaseComObject(newsCoverageFolder);
-                if (socialMediaReportFolder != null)
-                    ReleaseComObject(socialMediaReportFolder);
-                if (researchFolder != null)
-                    ReleaseComObject(researchFolder);
-                if (store != null)
-                    ReleaseComObject(store);
-                if (session != null)
-                    ReleaseComObject(session);
+                ReleaseComObject(rootFolderFolders);
+                ReleaseComObject(rootFolder);
+                ReleaseComObject(othersFolder);
+                ReleaseComObject(othersSubfolders);
+                ReleaseComObject(studentClubsFolder);
+                ReleaseComObject(marketingFolder);
+                ReleaseComObject(cdcFolder);
+                ReleaseComObject(whatzNewzFolder);
+                ReleaseComObject(libraryFolder);
+                ReleaseComObject(studentGovFolder);
+                ReleaseComObject(allStudentsFolder);
+                ReleaseComObject(newsCoverageFolder);
+                ReleaseComObject(socialMediaReportFolder);
+                ReleaseComObject(researchFolder);
+                ReleaseComObject(store);
+                ReleaseComObject(session);
             }
         }
 
