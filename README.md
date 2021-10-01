@@ -45,6 +45,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - News Coverage
   - Social Media Report
   - Office of Research
+  - Office of International Relations
 
 ### Rules
 
