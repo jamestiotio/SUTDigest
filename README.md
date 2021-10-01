@@ -24,7 +24,7 @@ Before everything else, please ensure that you have logged in into your Microsof
 
 Also ensure that you currently do not have any "conflicting" rules in your Microsoft Outlook profile. A clean slate would be the best recommended state, but if that is not possible/desirable, then you can check against the [catalogue section](#catalogue) below to ensure that there are no conflicting rules.
 
-You can download the ZIP file from the [Releases](https://github.com/jamestiotio/SUTDigest/releases) page and then run (double-click) the binary executable file (`SUTDigest.exe`). Wait for a while as the program executes the corresponding instructions. You can know that the program is done once the folders and the rules are present in your Outlook and a system indicator 'beep' sound on Windows can be heard.
+You can download the ZIP file (latest version) from the [Releases](https://github.com/jamestiotio/SUTDigest/releases/latest) page and then run (double-click) the binary executable file (`SUTDigest.exe`). Wait for a while as the program executes the corresponding instructions. You can know that the program is done once the folders and the rules are present in your Outlook and a system indicator 'beep' sound on Windows can be heard.
 
 The program will attempt to search and open your Microsoft Outlook desktop application, so do not worry if you see your Outlook window being opened/closed.
 
