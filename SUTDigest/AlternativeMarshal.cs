@@ -24,7 +24,7 @@ namespace SUTDigest
                 CLSIDFromProgIDEx(progID, out clsid);
             }
             //            catch
-            catch (Exception)
+            catch (Exception ex)
             {
                 CLSIDFromProgID(progID, out clsid);
             }

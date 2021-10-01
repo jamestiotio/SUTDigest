@@ -134,8 +134,8 @@ namespace SUTDigest
 
                 if (folder != null)
                 {
-                    // It's a 1D array; there's no reason to be looking for a 2D-array specific call.
-                    for (int i = 1; i <= folders.Length; i++)
+                    // "folders" is a one-dimensional (1D) array.
+                    for (int i = 1; i < folders.Length; i++)
                     {
                         Outlook.Folders subFolders = folder.Folders;
                         folder = subFolders[folders[i]] as Outlook.Folder;
@@ -148,7 +148,7 @@ namespace SUTDigest
                 }
                 return folder;
             }
-            catch
+            catch (Exception ex)
             {
                 return null;
             }
@@ -160,10 +160,12 @@ namespace SUTDigest
             try
             {
                 folder = (Outlook.Folder)baseFolder.Folders[folderName];
-                if (folder is null)
-                {
-                    folder = (Outlook.Folder)baseFolder.Folders.Add(folderName, Outlook.OlDefaultFolders.olFolderInbox);
-                }
+                return folder;
+            }
+            // If subfolder does not exist, a COMException will be thrown.
+            catch (COMException ex)
+            {
+                folder = (Outlook.Folder)baseFolder.Folders.Add(folderName, Outlook.OlDefaultFolders.olFolderInbox);
                 return folder;
             }
             catch (Exception ex)
@@ -205,7 +207,8 @@ namespace SUTDigest
                 allStudentsFolder = null,
                 newsCoverageFolder = null,
                 socialMediaReportFolder = null,
-                researchFolder = null;
+                researchFolder = null,
+                intlRelationsFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -236,6 +239,7 @@ namespace SUTDigest
                 newsCoverageFolder = GetSubFolder(@"News Coverage", othersFolder, application);
                 socialMediaReportFolder = GetSubFolder(@"Social Media Report", othersFolder, application);
                 researchFolder = GetSubFolder(@"Office of Research", othersFolder, application);
+                intlRelationsFolder = GetSubFolder(@"Office of International Relations", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -258,6 +262,7 @@ namespace SUTDigest
                 ReleaseComObject(newsCoverageFolder);
                 ReleaseComObject(socialMediaReportFolder);
                 ReleaseComObject(researchFolder);
+                ReleaseComObject(intlRelationsFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -502,6 +507,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("research@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string intlRelationsRuleName = "Emails from Office of International Relations";
+
+                if (!RuleExist(intlRelationsRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\Office of International Relations", application);
+
+                    Outlook.Rule rule = rules.Create(intlRelationsRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("global@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 

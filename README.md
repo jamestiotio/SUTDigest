@@ -61,6 +61,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Filter and move all emails with subjects that contain `Summary of coverage: Highlights of SUTD` to the News Coverage folder.
   - Filter and move all emails with subjects that contain `SUTD's Social Media Report` to the Social Media Report folder.
   - Filter and move all emails from `research@sutd.edu.sg` to the Office of Research folder.
+  - Filter and move all emails from `global@sutd.edu.sg` to the Office of International Relations folder.
 
 ## Feedback
 
