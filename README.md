@@ -48,16 +48,19 @@ Alternatively, you can clone this repository, build the executable yourself and 
 
 ### Rules
 
-- Filter and move all emails with sender addresses that contain `club.sutd.edu.sg` to the Student Clubs folder.
-- Filter and move all emails with sender addresses that contain `marcom.sutd.edu.sg` to the Office of Marketing folder.
-- Filter and move all emails from `careers@sutd.edu.sg` to the Career Development Centre folder.
-- Filter and move all emails with subjects that contain `Whatz Newz by Office of Student Life` to the Whatz Newz folder.
-- Filter and move all emails from `library@sutd.edu.sg` to the Library folder.
-- Filter and move all emails with sender addresses that contain `studentgov.sutd.edu.sg` to the Student Government folder.
-- Filter and move all emails sent to `*AllStudents@sutd.edu.sg` to the All Students folder.
-- Filter and move all emails with subjects that contain `Summary of coverage: Highlights of SUTD` to the News Coverage folder.
-- Filter and move all emails with subjects that contain `SUTD's Social Media Report` to the Social Media Report folder.
-- Filter and move all emails from `research@sutd.edu.sg` to the Office of Research folder.
+> To clarify, server-side rules are actually set up and deployed on the Outlook server (and hence would still operate on multiple different mail client alternatives like the Mail app or on the web, and even after the local Outlook mail client is closed), while client-only rules only work when the local Outlook mail client is open.
+
+- Server-Side:
+  - Filter and move all emails with sender addresses that contain `club.sutd.edu.sg` to the Student Clubs folder.
+  - Filter and move all emails with sender addresses that contain `marcom.sutd.edu.sg` to the Office of Marketing folder.
+  - Filter and move all emails from `careers@sutd.edu.sg` to the Career Development Centre folder.
+  - Filter and move all emails with subjects that contain `Whatz Newz by Office of Student Life` to the Whatz Newz folder.
+  - Filter and move all emails from `library@sutd.edu.sg` to the Library folder.
+  - Filter and move all emails with sender addresses that contain `studentgov.sutd.edu.sg` to the Student Government folder.
+  - Filter and move all emails sent to `*AllStudents@sutd.edu.sg` to the All Students folder.
+  - Filter and move all emails with subjects that contain `Summary of coverage: Highlights of SUTD` to the News Coverage folder.
+  - Filter and move all emails with subjects that contain `SUTD's Social Media Report` to the Social Media Report folder.
+  - Filter and move all emails from `research@sutd.edu.sg` to the Office of Research folder.
 
 ## Feedback
 
