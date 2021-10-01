@@ -134,7 +134,7 @@ namespace SUTDigest
 
                 if (folder != null)
                 {
-                    // It's a 1D array; there's no reason to be looking for a 2d-array specific call.
+                    // It's a 1D array; there's no reason to be looking for a 2D-array specific call.
                     for (int i = 1; i <= folders.Length; i++)
                     {
                         Outlook.Folders subFolders = folder.Folders;
@@ -297,7 +297,8 @@ namespace SUTDigest
                     moveRuleAction.Folder = destinationFolder;
                     moveRuleAction.Enabled = true;
 
-                    // This ensures that each rule is independent of each other
+                    // This ensures that each rule is independent of each other.
+                    // Even so, the order of rule creation here still matters.
                     ruleActions.Stop.Enabled = true;
 
                     rules.Save(true);
