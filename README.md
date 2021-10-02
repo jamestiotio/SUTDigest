@@ -49,7 +49,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
 
 ### Rules
 
-> To clarify, server-side rules are actually set up and deployed on the Outlook server (and hence would still operate on multiple different mail client alternatives like the Mail app or on the web, and even after the local Outlook mail client is closed), while client-only rules only work when the local Outlook mail client is open.
+> To clarify, server-side rules are actually set up, stored, and deployed on the Outlook server (and hence would still operate on multiple different mail client alternatives like the Mail app or on the web, and even after the local Outlook mail client is closed), while client-only rules only work when the local Outlook mail client is open.
 
 - Server-Side:
   - Filter and move all emails with sender addresses that contain `club.sutd.edu.sg` to the Student Clubs folder.
