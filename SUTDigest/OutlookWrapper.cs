@@ -160,6 +160,12 @@ namespace SUTDigest
             try
             {
                 folder = (Outlook.Folder)baseFolder.Folders[folderName];
+
+                if (folder == null)
+                {
+                    folder = (Outlook.Folder)baseFolder.Folders.Add(folderName, Outlook.OlDefaultFolders.olFolderInbox);
+                }
+
                 return folder;
             }
             // If subfolder does not exist, a COMException will be thrown.
