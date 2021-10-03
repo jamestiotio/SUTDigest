@@ -1,4 +1,5 @@
 # SUTDigest
+
 SUTD Outlook Mail Classifier/Organizer
 
 This tool will automatically create Outlook email rules, as well as the corresponding folders, to categorize SUTD emails. It can be run locally to apply both server-side and client-only rules.
@@ -49,7 +50,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
 
 ### Rules
 
-> To clarify, server-side rules are actually set up, stored, and deployed on the Outlook server (and hence would still operate on multiple different mail client alternatives like the Mail app or on the web, and even after the local Outlook mail client is closed), while client-only rules only work when the local Outlook mail client is open.
+> To clarify, server-side rules are actually set up, stored, and deployed on the Outlook server (and hence would still operate on multiple different mail client alternatives like the Mail app or on the web and even after the local Outlook mail client is closed) since such rules would be executed on the corresponding Exchange server, while client-only rules only work when the local Outlook mail client is open.
 
 - Server-Side:
   - Filter and move all emails with sender addresses that contain `club.sutd.edu.sg` to the Student Clubs folder.
@@ -79,3 +80,11 @@ I am not responsible for any breakage that this program does to your Microsoft O
 That said, obligatory formal note here:
 
 The information, software, products, and services included in or available through this SUTDigest repository may include inaccuracies or typographical errors. Changes are periodically made to this repository and to the information therein. The creator/maintainer and/or the respective contributors may make improvements and/or changes in this repository at any time. Advice received via this repository page should not be relied upon for personal, medical, legal or financial decisions and you should consult an appropriate professional for specific advice tailored to your situation.
+
+## Future TO-DOs
+
+- Investigate about the best way to retroactively execute all rules on all messages in the current user's Inbox folder by calling the [`Execute()` function](https://docs.microsoft.com/en-us/dotnet/api/microsoft.office.interop.outlook._rule.execute).
+- Add more rules.
+
+<p align="center">&mdash;⭐&mdash;</p>
+<p align="center"><i>Crafted, designed and built with ❤️ by <a href="https://github.com/jamestiotio">@jamestiotio</a> in Singapore. (*^▽^*)</i></p>
