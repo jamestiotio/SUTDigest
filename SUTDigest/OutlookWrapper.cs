@@ -214,7 +214,8 @@ namespace SUTDigest
                 newsCoverageFolder = null,
                 socialMediaReportFolder = null,
                 researchFolder = null,
-                intlRelationsFolder = null;
+                intlRelationsFolder = null,
+                hassEventsFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -246,6 +247,7 @@ namespace SUTDigest
                 socialMediaReportFolder = GetSubFolder(@"Social Media Report", othersFolder, application);
                 researchFolder = GetSubFolder(@"Office of Research", othersFolder, application);
                 intlRelationsFolder = GetSubFolder(@"Office of International Relations", othersFolder, application);
+                hassEventsFolder = GetSubFolder(@"HASS Events", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -269,6 +271,7 @@ namespace SUTDigest
                 ReleaseComObject(socialMediaReportFolder);
                 ReleaseComObject(researchFolder);
                 ReleaseComObject(intlRelationsFolder);
+                ReleaseComObject(hassEventsFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -537,6 +540,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("global@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string hassEventsRuleName = "HASS Events Emails";
+
+                if (!RuleExist(hassEventsRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\HASS Events", application);
+
+                    Outlook.Rule rule = rules.Create(hassEventsRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("hassevents@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 

@@ -47,6 +47,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Social Media Report
   - Office of Research
   - Office of International Relations
+  - HASS Events
 
 ### Rules
 
@@ -55,15 +56,16 @@ Alternatively, you can clone this repository, build the executable yourself and 
 - Server-Side:
   - Filter and move all emails with sender addresses that contain `club.sutd.edu.sg` to the Student Clubs folder.
   - Filter and move all emails with sender addresses that contain `marcom.sutd.edu.sg` to the Office of Marketing folder.
-  - Filter and move all emails from `careers@sutd.edu.sg` to the Career Development Centre folder.
+  - Filter and move all emails from [`careers@sutd.edu.sg`](mailto:careers@sutd.edu.sg) to the Career Development Centre folder.
   - Filter and move all emails with subjects that contain `Whatz Newz by Office of Student Life` to the Whatz Newz folder.
-  - Filter and move all emails from `library@sutd.edu.sg` to the Library folder.
+  - Filter and move all emails from [`library@sutd.edu.sg`](mailto:library@sutd.edu.sg) to the Library folder.
   - Filter and move all emails with sender addresses that contain `studentgov.sutd.edu.sg` to the Student Government folder.
-  - Filter and move all emails sent to `*AllStudents@sutd.edu.sg` to the All Students folder.
+  - Filter and move all emails sent to [`*AllStudents@sutd.edu.sg`](mailto:*AllStudents@sutd.edu.sg) to the All Students folder.
   - Filter and move all emails with subjects that contain `Summary of coverage: Highlights of SUTD` to the News Coverage folder.
   - Filter and move all emails with subjects that contain `SUTD's Social Media Report` to the Social Media Report folder.
-  - Filter and move all emails from `research@sutd.edu.sg` to the Office of Research folder.
-  - Filter and move all emails from `global@sutd.edu.sg` to the Office of International Relations folder.
+  - Filter and move all emails from [`research@sutd.edu.sg`](mailto:research@sutd.edu.sg) to the Office of Research folder.
+  - Filter and move all emails from [`global@sutd.edu.sg`](mailto:global@sutd.edu.sg) to the Office of International Relations folder.
+  - Filter and move all emails from [`hassevents@sutd.edu.sg`](mailto:hassevents@sutd.edu.sg) to the HASS Events folder.
 
 ## Feedback
 
