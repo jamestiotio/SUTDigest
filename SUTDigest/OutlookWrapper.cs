@@ -215,7 +215,8 @@ namespace SUTDigest
                 socialMediaReportFolder = null,
                 researchFolder = null,
                 intlRelationsFolder = null,
-                hassEventsFolder = null;
+                hassEventsFolder = null,
+                lkycicFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -248,6 +249,7 @@ namespace SUTDigest
                 researchFolder = GetSubFolder(@"Office of Research", othersFolder, application);
                 intlRelationsFolder = GetSubFolder(@"Office of International Relations", othersFolder, application);
                 hassEventsFolder = GetSubFolder(@"HASS Events", othersFolder, application);
+                lkycicFolder = GetSubFolder(@"LKYCIC", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -272,6 +274,7 @@ namespace SUTDigest
                 ReleaseComObject(researchFolder);
                 ReleaseComObject(intlRelationsFolder);
                 ReleaseComObject(hassEventsFolder);
+                ReleaseComObject(lkycicFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -564,6 +567,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("hassevents@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string lkycicRuleName = "LKYCIC Emails";
+
+                if (!RuleExist(lkycicRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\LKYCIC", application);
+
+                    Outlook.Rule rule = rules.Create(lkycicRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("lkycic@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 
