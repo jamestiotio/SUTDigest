@@ -216,7 +216,8 @@ namespace SUTDigest
                 researchFolder = null,
                 intlRelationsFolder = null,
                 hassEventsFolder = null,
-                lkycicFolder = null;
+                lkycicFolder = null,
+                aiResearchFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -250,6 +251,7 @@ namespace SUTDigest
                 intlRelationsFolder = GetSubFolder(@"Office of International Relations", othersFolder, application);
                 hassEventsFolder = GetSubFolder(@"HASS Events", othersFolder, application);
                 lkycicFolder = GetSubFolder(@"LKYCIC", othersFolder, application);
+                aiResearchFolder = GetSubFolder(@"AI Research", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -275,6 +277,7 @@ namespace SUTDigest
                 ReleaseComObject(intlRelationsFolder);
                 ReleaseComObject(hassEventsFolder);
                 ReleaseComObject(lkycicFolder);
+                ReleaseComObject(aiResearchFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -591,6 +594,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("lkycic@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string aiResearchRuleName = "AI Research Emails";
+
+                if (!RuleExist(aiResearchRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\AI Research", application);
+
+                    Outlook.Rule rule = rules.Create(aiResearchRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("AI_RESEARCH@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 

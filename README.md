@@ -49,6 +49,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Office of International Relations
   - HASS Events
   - LKYCIC
+  - AI Research
 
 ### Rules
 
@@ -68,6 +69,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Filter and move all emails from [`global@sutd.edu.sg`](mailto:global@sutd.edu.sg) to the Office of International Relations folder.
   - Filter and move all emails from [`hassevents@sutd.edu.sg`](mailto:hassevents@sutd.edu.sg) to the HASS Events folder.
   - Filter and move all emails from [`lkycic@sutd.edu.sg`](mailto:lkycic@sutd.edu.sg) to the LKYCIC folder.
+  - Filter and move all emails from [`AI_RESEARCH@sutd.edu.sg`](mailto:AI_RESEARCH@sutd.edu.sg) to the AI Research folder.
 
 ## Feedback
 
