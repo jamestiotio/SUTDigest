@@ -218,7 +218,8 @@ namespace SUTDigest
                 hassEventsFolder = null,
                 lkycicFolder = null,
                 aiResearchFolder = null,
-                smtFolder = null;
+                smtFolder = null,
+                wellbeingFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -254,6 +255,7 @@ namespace SUTDigest
                 lkycicFolder = GetSubFolder(@"LKYCIC", othersFolder, application);
                 aiResearchFolder = GetSubFolder(@"AI Research", othersFolder, application);
                 smtFolder = GetSubFolder(@"SMT", othersFolder, application);
+                wellbeingFolder = GetSubFolder(@"Wellbeing Services", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -280,6 +282,8 @@ namespace SUTDigest
                 ReleaseComObject(hassEventsFolder);
                 ReleaseComObject(lkycicFolder);
                 ReleaseComObject(aiResearchFolder);
+                ReleaseComObject(smtFolder);
+                ReleaseComObject(wellbeingFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -644,6 +648,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("sci-math@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string wellbeingRuleName = "Wellbeing Services Emails";
+
+                if (!RuleExist(wellbeingRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\Wellbeing Services", application);
+
+                    Outlook.Rule rule = rules.Create(wellbeingRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("wellbeing@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 

@@ -51,6 +51,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - LKYCIC
   - AI Research
   - SMT
+  - Wellbeing Services
 
 ### Rules
 
@@ -72,6 +73,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Filter and move all emails from [`lkycic@sutd.edu.sg`](mailto:lkycic@sutd.edu.sg) to the LKYCIC folder.
   - Filter and move all emails from [`AI_RESEARCH@sutd.edu.sg`](mailto:AI_RESEARCH@sutd.edu.sg) to the AI Research folder.
   - Filter and move all emails from [`sci-math@sutd.edu.sg`](mailto:sci-math@sutd.edu.sg) to the SMT folder.
+  - Filter and move all emails from [`wellbeing@sutd.edu.sg`](mailto:wellbeing@sutd.edu.sg) to the Wellbeing Services folder.
 
 ## Feedback
 
