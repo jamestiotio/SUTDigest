@@ -221,7 +221,8 @@ namespace SUTDigest
                 smtFolder = null,
                 wellbeingFolder = null,
                 uropFolder = null,
-                utopFolder = null;
+                utopFolder = null,
+                iapAdminFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -260,6 +261,7 @@ namespace SUTDigest
                 wellbeingFolder = GetSubFolder(@"Wellbeing Services", othersFolder, application);
                 uropFolder = GetSubFolder(@"UROP", othersFolder, application);
                 utopFolder = GetSubFolder(@"UTOP", othersFolder, application);
+                iapAdminFolder = GetSubFolder(@"IAP Admin", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -290,6 +292,7 @@ namespace SUTDigest
                 ReleaseComObject(wellbeingFolder);
                 ReleaseComObject(uropFolder);
                 ReleaseComObject(utopFolder);
+                ReleaseComObject(iapAdminFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -726,6 +729,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("utop@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string iapAdminRuleName = "IAP Admin Emails";
+
+                if (!RuleExist(iapAdminRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\IAP Admin", application);
+
+                    Outlook.Rule rule = rules.Create(iapAdminRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("iapadmin@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 

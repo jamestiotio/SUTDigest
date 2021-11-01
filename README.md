@@ -54,6 +54,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Wellbeing Services
   - UROP
   - UTOP
+  - IAP Admin
 
 ### Rules
 
@@ -78,6 +79,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Filter and move all emails from [`wellbeing@sutd.edu.sg`](mailto:wellbeing@sutd.edu.sg) to the Wellbeing Services folder.
   - Filter and move all emails from [`urop@sutd.edu.sg`](mailto:urop@sutd.edu.sg) to the UROP folder.
   - Filter and move all emails from [`utop@sutd.edu.sg`](mailto:utop@sutd.edu.sg) to the UTOP folder.
+  - Filter and move all emails from [`iapadmin@sutd.edu.sg`](mailto:iapadmin@sutd.edu.sg) to the IAP Admin folder.
 
 ## Feedback
 
