@@ -23,7 +23,7 @@ Simply put, we just want a double-clickable binary file that can setup, settle a
 
 Before everything else, please ensure that you have logged in into your Microsoft Outlook account on your computer's Outlook desktop application (not the web client nor the Mail desktop program) and that you currently have and are connected to a working Internet connection.
 
-Also ensure that you currently do not have any "conflicting" rules in your Microsoft Outlook profile. A clean slate would be the best recommended state, but if that is not possible/desirable, then you can check against the [catalogue section](#catalogue) below to ensure that there are no conflicting rules.
+Folders and rules are identified by name. As such, later "addition" updates of this software are automatically compatible to previous versions (except if there are name-related changes). However, it might not necessarily be compatible with other user-defined custom rules. As such, please also ensure that you currently do not have any "conflicting" rules in your Microsoft Outlook profile. A clean slate would be the best recommended state, but if that is not possible/desirable, then you can check against the [catalogue section](#catalogue) below to ensure that there are no conflicting rules.
 
 You can download the ZIP file (latest version) from the [Releases](https://github.com/jamestiotio/SUTDigest/releases/latest) page and then run (double-click) the binary executable file (`SUTDigest.exe`). Wait for a while as the program executes the corresponding instructions. You can know that the program is done once the folders and the rules are present in your Outlook and a system indicator 'beep' sound on Windows can be heard.
 
@@ -52,6 +52,8 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - AI Research
   - SMT
   - Wellbeing Services
+  - UROP
+  - UTOP
 
 ### Rules
 
@@ -74,6 +76,8 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Filter and move all emails from [`AI_RESEARCH@sutd.edu.sg`](mailto:AI_RESEARCH@sutd.edu.sg) to the AI Research folder.
   - Filter and move all emails from [`sci-math@sutd.edu.sg`](mailto:sci-math@sutd.edu.sg) to the SMT folder.
   - Filter and move all emails from [`wellbeing@sutd.edu.sg`](mailto:wellbeing@sutd.edu.sg) to the Wellbeing Services folder.
+  - Filter and move all emails from [`urop@sutd.edu.sg`](mailto:urop@sutd.edu.sg) to the UROP folder.
+  - Filter and move all emails from [`utop@sutd.edu.sg`](mailto:utop@sutd.edu.sg) to the UTOP folder.
 
 ## Feedback
 
