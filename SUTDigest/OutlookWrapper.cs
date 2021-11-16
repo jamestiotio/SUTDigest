@@ -222,7 +222,8 @@ namespace SUTDigest
                 wellbeingFolder = null,
                 uropFolder = null,
                 utopFolder = null,
-                iapAdminFolder = null;
+                iapAdminFolder = null,
+                fablabFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -262,6 +263,7 @@ namespace SUTDigest
                 uropFolder = GetSubFolder(@"UROP", othersFolder, application);
                 utopFolder = GetSubFolder(@"UTOP", othersFolder, application);
                 iapAdminFolder = GetSubFolder(@"IAP Admin", othersFolder, application);
+                fablabFolder = GetSubFolder(@"Fabrication Lab", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -293,6 +295,7 @@ namespace SUTDigest
                 ReleaseComObject(uropFolder);
                 ReleaseComObject(utopFolder);
                 ReleaseComObject(iapAdminFolder);
+                ReleaseComObject(fablabFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -753,6 +756,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("iapadmin@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string fablabRuleName = "Fabrication Lab Emails";
+
+                if (!RuleExist(fablabRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\Fabrication Lab", application);
+
+                    Outlook.Rule rule = rules.Create(fablabRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("fablab@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 
