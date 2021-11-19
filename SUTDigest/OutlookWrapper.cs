@@ -223,7 +223,8 @@ namespace SUTDigest
                 uropFolder = null,
                 utopFolder = null,
                 iapAdminFolder = null,
-                fablabFolder = null;
+                fablabFolder = null,
+                entrepreneurshipFolder = null;
             Outlook.Folders rootFolderFolders = null,
                 othersSubfolders = null;
 
@@ -264,6 +265,7 @@ namespace SUTDigest
                 utopFolder = GetSubFolder(@"UTOP", othersFolder, application);
                 iapAdminFolder = GetSubFolder(@"IAP Admin", othersFolder, application);
                 fablabFolder = GetSubFolder(@"Fabrication Lab", othersFolder, application);
+                entrepreneurshipFolder = GetSubFolder(@"Entrepreneurship", othersFolder, application);
             }
             catch (Exception ex)
             {
@@ -296,6 +298,7 @@ namespace SUTDigest
                 ReleaseComObject(utopFolder);
                 ReleaseComObject(iapAdminFolder);
                 ReleaseComObject(fablabFolder);
+                ReleaseComObject(entrepreneurshipFolder);
                 ReleaseComObject(store);
                 ReleaseComObject(session);
             }
@@ -780,6 +783,30 @@ namespace SUTDigest
 
                     Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
                     senderAddressRuleCondition.Recipients.Add("fablab@sutd.edu.sg");
+                    senderAddressRuleCondition.Recipients.ResolveAll();
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string entrepreneurshipRuleName = "Entrepreneurship Emails";
+
+                if (!RuleExist(entrepreneurshipRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\Entrepreneurship", application);
+
+                    Outlook.Rule rule = rules.Create(entrepreneurshipRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.ToOrFromRuleCondition senderAddressRuleCondition = ruleConditions.From;
+                    senderAddressRuleCondition.Recipients.Add("entrepreneurship@sutd.edu.sg");
                     senderAddressRuleCondition.Recipients.ResolveAll();
                     senderAddressRuleCondition.Enabled = true;
 

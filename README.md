@@ -56,6 +56,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - UTOP
   - IAP Admin
   - Fabrication Lab
+  - Entrepreneurship
 
 ### Rules
 
@@ -82,6 +83,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
   - Filter and move all emails from [`utop@sutd.edu.sg`](mailto:utop@sutd.edu.sg) to the UTOP folder.
   - Filter and move all emails from [`iapadmin@sutd.edu.sg`](mailto:iapadmin@sutd.edu.sg) to the IAP Admin folder.
   - Filter and move all emails from [`fablab@sutd.edu.sg`](mailto:fablab@sutd.edu.sg) to the Fabrication Lab folder.
+  - Filter and move all emails from [`entrepreneurship@sutd.edu.sg`](mailto:entrepreneurship@sutd.edu.sg) to the Entrepreneurship folder.
 
 ## Feedback
 
