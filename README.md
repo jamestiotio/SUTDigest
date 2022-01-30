@@ -37,6 +37,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
 
 - Others
   - Student Clubs
+  - Interest Groups
   - Office of Marketing
   - Career Development Centre
   - Whatz Newz
@@ -64,6 +65,7 @@ Alternatively, you can clone this repository, build the executable yourself and 
 
 - Server-Side:
   - Filter and move all emails with sender addresses that contain `club.sutd.edu.sg` to the Student Clubs folder.
+  - Filter and move all emails with sender addresses that contain `ig.sutd.edu.sg` to the Interest Groups folder.
   - Filter and move all emails with sender addresses that contain `marcom.sutd.edu.sg` to the Office of Marketing folder.
   - Filter and move all emails from [`careers@sutd.edu.sg`](mailto:careers@sutd.edu.sg) to the Career Development Centre folder.
   - Filter and move all emails with subjects that contain `Whatz Newz by Office of Student Life` to the Whatz Newz folder.

@@ -205,6 +205,7 @@ namespace SUTDigest
             Outlook.Folder rootFolder = null,
                 othersFolder = null,
                 studentClubsFolder = null,
+                interestGroupsFolder = null,
                 marketingFolder = null,
                 cdcFolder = null,
                 whatzNewzFolder = null,
@@ -246,6 +247,7 @@ namespace SUTDigest
                 othersSubfolders = othersFolder.Folders;
 
                 studentClubsFolder = GetSubFolder(@"Student Clubs", othersFolder, application);
+                interestGroupsFolder = GetSubFolder(@"Interest Groups", othersFolder, application);
                 marketingFolder = GetSubFolder(@"Office of Marketing", othersFolder, application);
                 cdcFolder = GetSubFolder(@"Career Development Centre", othersFolder, application);
                 whatzNewzFolder = GetSubFolder(@"Whatz Newz", othersFolder, application);
@@ -279,6 +281,7 @@ namespace SUTDigest
                 ReleaseComObject(othersFolder);
                 ReleaseComObject(othersSubfolders);
                 ReleaseComObject(studentClubsFolder);
+                ReleaseComObject(interestGroupsFolder);
                 ReleaseComObject(marketingFolder);
                 ReleaseComObject(cdcFolder);
                 ReleaseComObject(whatzNewzFolder);
@@ -320,13 +323,13 @@ namespace SUTDigest
                 rootFolder = store.GetRootFolder();
 
                 // Rules are identified by name
-                string studentClubRuleName = "Emails from Student Clubs";
+                string studentClubsRuleName = "Emails from Student Clubs";
 
-                if (!RuleExist(studentClubRuleName, rules))
+                if (!RuleExist(studentClubsRuleName, rules))
                 {
                     Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\Student Clubs", application);
 
-                    Outlook.Rule rule = rules.Create(studentClubRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.Rule rule = rules.Create(studentClubsRuleName, Outlook.OlRuleType.olRuleReceive);
                     Outlook.RuleConditions ruleConditions = rule.Conditions;
 
                     Outlook.AddressRuleCondition senderAddressRuleCondition = ruleConditions.SenderAddress;
@@ -340,6 +343,29 @@ namespace SUTDigest
 
                     // This ensures that each rule is independent of each other.
                     // Even so, the order of rule creation here still matters.
+                    ruleActions.Stop.Enabled = true;
+
+                    rules.Save(true);
+                }
+
+                string interestGroupsRuleName = "Emails from Interest Groups";
+
+                if (!RuleExist(interestGroupsRuleName, rules))
+                {
+                    Outlook.MAPIFolder destinationFolder = GetFolder(rootFolder.FolderPath + @"\Others\Interest Groups", application);
+
+                    Outlook.Rule rule = rules.Create(interestGroupsRuleName, Outlook.OlRuleType.olRuleReceive);
+                    Outlook.RuleConditions ruleConditions = rule.Conditions;
+
+                    Outlook.AddressRuleCondition senderAddressRuleCondition = ruleConditions.SenderAddress;
+                    senderAddressRuleCondition.Address = new string[] { "ig.sutd.edu.sg" };
+                    senderAddressRuleCondition.Enabled = true;
+
+                    Outlook.RuleActions ruleActions = rule.Actions;
+                    Outlook.MoveOrCopyRuleAction moveRuleAction = ruleActions.MoveToFolder;
+                    moveRuleAction.Folder = destinationFolder;
+                    moveRuleAction.Enabled = true;
+
                     ruleActions.Stop.Enabled = true;
 
                     rules.Save(true);

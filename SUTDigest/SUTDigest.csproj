@@ -11,7 +11,7 @@
     <Description>SUTD Outlook Mail Classifier/Organizer.</Description>
     <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
     <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
-    <Version>1.0.11</Version>
+    <Version>1.0.12</Version>
     <PackageTags></PackageTags>
     <RepositoryUrl>https://github.com/jamestiotio/SUTDigest</RepositoryUrl>
     <PackageProjectUrl>https://github.com/jamestiotio/SUTDigest</PackageProjectUrl>
